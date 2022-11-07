@@ -29,7 +29,7 @@ def save_response_content(response, destination):
     else:
         total = None
     with open(destination, 'wb') as f:
-        for data in tqdm(response.iter_content(chunk_size=chunk_size), leave=False, total=total):
+        for data in response.iter_content(chunk_size=chunk_size):
             f.write(data)
 
 
@@ -42,7 +42,7 @@ def run():
     os.makedirs(model, exist_ok=True)
     url = simclr_base_url.format(model=model, category=args.simclr_category)
     model_category = simclr_categories[args.simclr_category]
-    for file in tqdm(files):
+    for file in files:
         f = file.format(category=model_category)
         download(url + f, os.path.join(model, f))
 
