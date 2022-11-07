@@ -124,7 +124,7 @@ class ResNet(nn.Module):
         self.fc = nn.Linear(channels_in, 1000)
 
     def forward(self, x, apply_fc=False):
-        h = self.net(x).mean(dim=[2, 3])
+        h = self.net(x)#.mean(dim=[2, 3])
         if apply_fc:
             h = self.fc(h)
         return h
